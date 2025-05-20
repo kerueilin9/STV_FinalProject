@@ -1,0 +1,8 @@
+{
+  "platformName": "Android",
+  "automationName": "UiAutomator2",
+  "deviceName": "Android",
+  "appPackage": "com.money.smoney_android",
+  "appActivity": "com.money.smoney_android.ui.splash.SplashActivity",
+  "noReset": true
+}
