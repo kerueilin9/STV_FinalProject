@@ -1,0 +1,4 @@
+# Python dependencies for Appium testing
+appium-python-client>=3.0.0
+selenium>=4.15.0
+websocket-client>=1.6.4

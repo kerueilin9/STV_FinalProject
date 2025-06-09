@@ -1,7 +1,0 @@
-START_NOW_BUTTON = 'new UiSelector().text("不用同步，直接開始")'
-CANCEL_BUTTON = 'new UiSelector().text("Cancel")'
-ADD_BUTTON = 'new UiSelector().className("android.widget.Button").instance(0)'
-OK_BUTTON = 'new UiSelector().className("android.view.View").instance(22)'
-ZOOM_OUT_BUTTON = 'new UiSelector().className("android.widget.Button").instance(2)'
-BUTTON_9 = 'new UiSelector().className("android.view.View").instance(12)'
-BUTTON_0 = 'new UiSelector().className("android.view.View").instance(11)'
