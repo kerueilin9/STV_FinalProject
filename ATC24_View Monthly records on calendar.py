@@ -13,7 +13,7 @@ capabilities = dict(
     appPackage='com.money.smoney_android',
     appActivity='com.money.smoney_android.ui.splash.SplashActivity',
     language='zh',
-    locale='CN',
+    locale='TW',
     # 自動授予權限
     autoGrantPermissions=True,
     # 或者使用以下設置跳過系統對話框
@@ -39,31 +39,20 @@ class TestPLStatement(unittest.TestCase):
 
         # 如果有 Cancel 按鈕就點掉
         try:
-            wait_and_click(self.driver, 5, 'new UiSelector().text("取消")')
+            wait_and_click(self.driver, 2, 'new UiSelector().text("取消")')
         except Exception:
             print("Cancel button not found")
-
-        # 等待應用程式啟動
         time.sleep(0.5)
 
-        # 選取選單按鈕
+        # 選取月支出
+        wait_and_click(self.driver, 20, 'new UiSelector().text("月支出")')
+        time.sleep(0.5)
+
+        # 點擊 圖表 按鈕
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(1)')
-        
         time.sleep(0.5)
 
-        # 點擊 帳務報表 按鈕
-        wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(7)')
-
-        time.sleep(0.5)
-
-        # 驗證目標元素變為黃色
-        target_element = wait_until_present(self.driver, 20, 'new UiSelector().className("android.view.View").instance(2)')
-        background_color = target_element.value_of_css_property("background-color")
-        
-        time.sleep(0.5)
-        
-        # 假設黃色背景是 rgba(255, 255, 0, 1)
-        self.assertEqual(background_color, 'rgba(255, 255, 0, 1)', "目標元素背景未變為黃色")
+        wait_until_present(self.driver, 20, 'new UiSelector().text("無記帳記錄")')
 
 if __name__ == '__main__':
     unittest.main()

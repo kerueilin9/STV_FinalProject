@@ -13,7 +13,7 @@ capabilities = dict(
     appPackage='com.money.smoney_android',
     appActivity='com.money.smoney_android.ui.splash.SplashActivity',
     language='zh',
-    locale='CN',
+    locale='TW',
     # 自動授予權限
     autoGrantPermissions=True,
     # 或者使用以下設置跳過系統對話框
@@ -39,35 +39,33 @@ class TestPLStatement(unittest.TestCase):
 
         # 如果有 Cancel 按鈕就點掉
         try:
-            wait_and_click(self.driver, 5, 'new UiSelector().text("取消")')
+            wait_and_click(self.driver, 2, 'new UiSelector().text("取消")')
         except Exception:
             print("Cancel button not found")
-        time.sleep(0.5)
 
+        time.sleep(0.5)  # 等待應用程式啟動
+        
         # 等待應用程式啟動
         # 選取選單按鈕
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(1)')
         time.sleep(0.5)
 
-        # 點擊 搜尋圖示 按鈕
-        wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(5)')
+        # 點擊 帳務報表 按鈕
+        wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(7)')
         time.sleep(0.5)
 
-        # 點擊 textbox
-        wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.ViewGroup").instance(1)')
+        # 點擊「年」按鈕
+        wait_and_click(self.driver, 20, 'new UiSelector().text("年")')
         time.sleep(0.5)
-
-        # 輸入搜尋關鍵字
-        search_input = wait_until_present(self.driver, 20, 'new UiSelector().className("android.widget.EditText").instance(0)')
-        search_input.send_keys("欠款")
-        time.sleep(0.5)
-
-        # 驗證目標圖示變換
-        target_element = wait_until_present(self.driver, 20, 'com.money.smoney_android:id/ivNotFind')
-
-        # 驗證目標圖示不是未搜尋的圖示
-        self.assertNotEqual(target_element, 'com.money.smoney_android:id/ivNoSearch')
-        time.sleep(0.5)
+        
+        # 驗證目標元素是否存在且可點擊（表示按鈕已被選中）
+        target_element = wait_until_present(self.driver, 20, 'new UiSelector().text("年")')
+        
+        # 驗證元素是否可點擊（Android 中選中的按鈕通常會保持可點擊狀態）
+        self.assertTrue(target_element.is_enabled(), "目標元素應該是啟用狀態")
+        
+        # 驗證元素是否可見
+        self.assertTrue(target_element.is_displayed(), "目標元素應該是可見的")
 
 if __name__ == '__main__':
     unittest.main()

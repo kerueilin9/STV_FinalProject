@@ -11,9 +11,9 @@ capabilities = dict(
     automationName='uiautomator2',
     deviceName='Android',
     appPackage='com.money.smoney_android',
-    appActivity='com.money.smoney_android.ui.splash.SplashActivity',
+    appActivity='com.money.smoney_android.ui.splash.SplashActivity',    
     language='zh',
-    locale='CN'
+    locale='TW'
 )
 
 appium_server_url = 'http://localhost:4723'
@@ -21,6 +21,12 @@ appium_server_url = 'http://localhost:4723'
 class TestAppium(unittest.TestCase):
     def setUp(self) -> None:
         self.driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
+
+    def tearDown(self) -> None:
+        if self.driver:
+            self.driver.quit()
+
+    def test_click_add_button(self):
         # 點擊「不用同步，直接開始」
         wait_and_click(self.driver, 20, 'new UiSelector().text("不用同步，直接開始")')
 
@@ -30,11 +36,6 @@ class TestAppium(unittest.TestCase):
         except Exception:
             print("Cancel button not found")
 
-    def tearDown(self) -> None:
-        if self.driver:
-            self.driver.quit()
-
-    def test_click_add_button(self):
         # 點擊「新增」按鈕
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(0)')
 
@@ -46,6 +47,7 @@ class TestAppium(unittest.TestCase):
         # 點擊 Zoom out 鈕
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(2)')
         time.sleep(0.5)
+        
         # 輸入數字
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(12)')  # 9
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(11)')  # 0
@@ -55,17 +57,10 @@ class TestAppium(unittest.TestCase):
         
         time.sleep(0.5)
         wait_and_click(self.driver, 5, 'new UiSelector().text("早餐")')
-        wait_and_click(self.driver, 5, 'new UiSelector().className("android.view.View").instance(21)')
-        wait_and_click(self.driver, 5, 'new UiSelector().className("android.view.View").instance(21)')
-        wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(4)')  # 7
-        wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(11)')  # 0
+        note_input = wait_until_present(self.driver, 20, 'new UiSelector().text("早餐")')
+        note_input.send_keys("test")
         # 再點 OK
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(22)')
-        
-        
-        
-        
-        
 
 if __name__ == '__main__':
     unittest.main()

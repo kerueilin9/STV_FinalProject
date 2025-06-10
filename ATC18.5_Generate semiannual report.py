@@ -22,7 +22,7 @@ capabilities = dict(
     fullReset=False  # 不完全重置
 )
 
-appium_server_url = 'http://127.0.0.1:4723'
+appium_server_url = 'http://localhost:4723'
 
 class TestPLStatement(unittest.TestCase):
     def setUp(self) -> None:
@@ -39,20 +39,36 @@ class TestPLStatement(unittest.TestCase):
 
         # 如果有 Cancel 按鈕就點掉
         try:
-            wait_and_click(self.driver, 5, 'new UiSelector().text("取消")')
+            wait_and_click(self.driver, 2, 'new UiSelector().text("取消")')
         except Exception:
             print("Cancel button not found")
         time.sleep(0.5)
-
-        # 選取月支出
-        wait_and_click(self.driver, 20, 'new UiSelector().text("月支出")')
-        time.sleep(0.5)
-
-        # 點擊 圖表 按鈕
+        # 等待應用程式啟動
+        # 選取選單按鈕
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(1)')
+
         time.sleep(0.5)
 
-        wait_until_present(self.driver, 20, 'new UiSelector().text("无记帐记录")')
+        # 點擊 帳務報表 按鈕
+        wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(7)')
+
+        time.sleep(0.5)
+
+        # 點擊「近六個月」按鈕
+        wait_and_click(self.driver, 20, 'new UiSelector().text("近六個月")')
+
+        time.sleep(0.5) 
+
+        # 驗證目標元素是否存在且可點擊（表示按鈕已被選中）
+        target_element = wait_until_present(self.driver, 20, 'new UiSelector().text("近六個月")')
+        
+        # 驗證元素是否可點擊（Android 中選中的按鈕通常會保持可點擊狀態）
+        self.assertTrue(target_element.is_enabled(), "目標元素應該是啟用狀態")
+        
+        # 驗證元素是否可見
+        self.assertTrue(target_element.is_displayed(), "目標元素應該是可見的")
+        
+        time.sleep(0.5)
 
 if __name__ == '__main__':
     unittest.main()

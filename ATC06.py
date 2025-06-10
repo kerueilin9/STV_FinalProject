@@ -11,9 +11,8 @@ capabilities = dict(
     automationName='uiautomator2',
     deviceName='Android',
     appPackage='com.money.smoney_android',
-    appActivity='com.money.smoney_android.ui.splash.SplashActivity',
-    language='zh',
-    locale='CN'
+    appActivity='com.money.smoney_android.ui.splash.SplashActivity',    language='zh',
+    locale='TW'
 )
 
 appium_server_url = 'http://localhost:4723'

@@ -32,7 +32,7 @@ class TestAppium(unittest.TestCase):
 
         # 如果有 Cancel 按鈕就點掉
         try:
-            wait_and_click(self.driver, 5, 'new UiSelector().text("Cancel")')
+            wait_and_click(self.driver, 2, 'new UiSelector().text("Cancel")')
         except Exception:
             print("Cancel button not found")
 

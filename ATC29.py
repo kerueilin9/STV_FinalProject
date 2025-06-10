@@ -24,8 +24,8 @@ capabilities = dict(
     deviceName='Android',
     appPackage='com.money.smoney_android',
     appActivity='com.money.smoney_android.ui.splash.SplashActivity',
-    language='zh',
-    locale='TW'
+    language='en',
+    locale='US'
 )
 appium_server_url = 'http://localhost:4723'
 
