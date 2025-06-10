@@ -65,6 +65,7 @@ appium driver install uiautomator2
 
 ```bash
 appium --port 4723
+appium --use-plugins=inspector --allow-cors
 ```
 
 ### 2. 執行測試
@@ -73,6 +74,7 @@ appium --port 4723
 
 ```bash
 python ATC01.py
+
 ```
 
 #### 執行次要測試案例 (ATC02)

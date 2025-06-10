@@ -13,7 +13,7 @@ capabilities = dict(
     appPackage='com.money.smoney_android',
     appActivity='com.money.smoney_android.ui.splash.SplashActivity',
     language='zh',
-    locale='TW'
+    locale='CN'
 )
 
 appium_server_url = 'http://localhost:4723'
@@ -32,7 +32,7 @@ class TestAppium(unittest.TestCase):
 
         # 如果有 Cancel 按鈕就點掉
         try:
-            wait_and_click(self.driver, 5, 'new UiSelector().text("Cancel")')
+            wait_and_click(self.driver, 5, 'new UiSelector().text("Cancel")')   
         except Exception:
             print("Cancel button not found")
 
@@ -48,7 +48,7 @@ class TestAppium(unittest.TestCase):
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.widget.Button").instance(2)')
         
         # 點擊 收入 鈕
-        wait_and_click(self.driver, 5, 'new UiSelector().text("收入")')
+        wait_and_click(self.driver, 5, 'new UiSelector().text("交通")')
         # 輸入數字
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(12)')  # 9
         wait_and_click(self.driver, 20, 'new UiSelector().className("android.view.View").instance(11)')  # 0
